@@ -80,6 +80,8 @@ int main(){
 
     enqueue(&queue, 2);
 
+    dequeue(&queue);
+
 
     struct node_t *head_ptr = NULL;
     head_ptr = queue.head;
