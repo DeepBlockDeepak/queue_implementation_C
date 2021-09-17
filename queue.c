@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <limits.h>
 #include <stdbool.h>
 #include <assert.h>
+
+#define QUEUE_IS_EMPTY INT_MIN
 
 
 struct node_t{
@@ -50,7 +52,7 @@ bool enqueue(struct queue_t *q, int val){
 int dequeue(struct queue_t *q){
     //if the queue is empty
     if (!q->head){
-        return 0;
+        return QUEUE_IS_EMPTY;
     }
 
     //temporary pointer to the front of list node
@@ -70,25 +72,33 @@ int dequeue(struct queue_t *q){
 
 }
 
-
-
-
 int main(){
 
     struct queue_t queue;
     init_queue(&queue);
 
     enqueue(&queue, 2);
+    enqueue(&queue, 6);
+    enqueue(&queue, 10);
+    enqueue(&queue, 14);
+    enqueue(&queue, 18);
 
-    dequeue(&queue);
 
 
     struct node_t *head_ptr = NULL;
     head_ptr = queue.head;
 
+    printf("Current Queue, Oldest to Newest:\n");
     while(head_ptr){
         printf("node: %d\n", head_ptr->val);
         head_ptr = head_ptr->next;
+    }
+
+    printf("\n\nDequeuing...\n");
+    //deneque the queue and return values
+    int dq_val;
+    while((dq_val = dequeue(&queue)) != QUEUE_IS_EMPTY){
+        printf("Dequeued: %d\n", dq_val);
     }
 
     return 0;
