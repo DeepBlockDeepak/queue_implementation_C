@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <assert.h>
 
 
 struct node_t{
@@ -46,19 +47,42 @@ bool enqueue(struct queue_t *q, int val){
 }
 
 
+int dequeue(struct queue_t *q){
+    //if the queue is empty
+    if (!q->head){
+        return 0;
+    }
+
+    //temporary pointer to the front of list node
+    struct node_t *dq_tmp = q->head;
+    int head_val = dq_tmp->val;
+
+    //bypass deleted node, and free
+    q->head = q->head->next;
+    free(dq_tmp);
+
+    //If head was the last in line, set the tail to NULL too
+    if (!q->head){
+        q->tail = NULL;
+    }
+
+    return head_val;
+
+}
 
 
 
 
 int main(){
 
-    struct queue_t *queue = NULL;
+    struct queue_t queue;
+    init_queue(&queue);
 
-    enqueue(queue, 2);
+    enqueue(&queue, 2);
 
 
     struct node_t *head_ptr = NULL;
-    head_ptr = &node;
+    head_ptr = queue.head;
 
     while(head_ptr){
         printf("node: %d\n", head_ptr->val);
