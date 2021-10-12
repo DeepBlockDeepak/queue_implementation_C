@@ -14,8 +14,8 @@ struct node_t{
 
 
 struct queue_t{
-    struct node_t *head;
-    struct node_t *tail;
+    struct node_t *head;    // The linked list is represented like tail----->head
+    struct node_t *tail;    //  Where nodes enter the queue at the tail, and the oldest node is at head
 };
 
 void init_queue(struct queue_t *q){
