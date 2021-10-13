@@ -14,13 +14,13 @@ struct node_t{
 
 
 struct queue_t{
-    struct node_t *head;    // The linked list is represented like tail----->head
+    struct node_t *head;    // The linked list is represented like q.head----->q.tail->Null .... 
     struct node_t *tail;    //  Where nodes enter the queue at the tail, and the oldest node is at head
 };
 
 void init_queue(struct queue_t *q){
-    q->head = NULL;
-    q->tail = NULL;
+    q->head = NULL;         // The Queue's head points to the oldest node, which is the head of a linked list... *head => oldest_node---
+    q->tail = NULL;         // Queue's tail points to the newest node, which is the tail of the linked list... *head--->*tail->Null
 }
 
 bool enqueue(struct queue_t *q, int val){
@@ -34,7 +34,7 @@ bool enqueue(struct queue_t *q, int val){
 
     //If the the tail node currently exists, point it to the new node
     if (q->tail){
-        q->tail->next = new_node; //*(q->tail).next
+        q->tail->next = new_node; //(*(q->tail)).next // (*(*q).tail).next
     }
     //Set the new tail node to the queue's tail 
     q->tail = new_node;
