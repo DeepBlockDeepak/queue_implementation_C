@@ -10,8 +10,34 @@
  * 
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+#include <stdbool.h>
+#include <assert.h>
+
+
 #ifndef QUEUE_H
 #define QUEUE_H
+
+
+#define QUEUE_IS_EMPTY INT_MIN
+
+enum user_choices{
+    ENQUEUE = 1, DEQUEUE, DEQUEUE_ENTIRELY, PRINT_QUEUE, QUIT
+};
+
+struct node_t{
+    int val;
+    struct node_t *next;
+};
+
+
+struct queue_t{
+    struct node_t *head;    // The linked list is represented like q.head----->q.tail->Null .... 
+    struct node_t *tail;    //  Where nodes enter the queue at the tail, and the oldest node is at head
+};
+
 
 
 void init_queue(struct queue_t *q);
