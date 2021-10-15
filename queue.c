@@ -23,48 +23,6 @@ struct queue_t{
 
 
 
-void user_choice_controls(int user_choice, struct queue_t *q){
-
-    int node_val;   // for the user's enqueue command
-
-    switch (user_choice):
-    case ENQUEUE:
-        //run an enqueue function
-        printf("Insert this node's value: ");
-        scanf("%d", &node_val);
-        enqueue(q, node_val);
-
-        break;
-
-    case DEQUEUE:
-        dequeue(q);
-        break;
-
-    case DEQUEUE_ENTIRELY:
-        printf("\n\nDequeuing...\n");
-        //deneque the queue and return values
-        int dq_val;
-        while((dq_val = dequeue(q)) != QUEUE_IS_EMPTY){
-            printf("Dequeued: %d\n", dq_val);
-        }
-
-        break;
-
-    case PRINT_QUEUE:
-        struct node_t *head_ptr = NULL;
-        head_ptr = q->head;
-
-        printf("Current Queue, Oldest to Newest:\n");
-        while(head_ptr){
-            printf("node: %d\n", head_ptr->val);
-            head_ptr = head_ptr->next;
-        }
-        break;
-
-    default:
-        break;
-
-}
 
 
 
@@ -122,6 +80,56 @@ int dequeue(struct queue_t *q){
 
 }
 
+
+
+void user_choice_controls(int user_choice, struct queue_t *q){
+
+    int node_val;   // for the user's enqueue command
+    struct node_t *head_ptr = NULL; // used for Print_Queue option
+
+
+    switch (user_choice){
+    case ENQUEUE:
+        //run an enqueue function
+        printf("\nInsert this node's value: ");
+        scanf("%d", &node_val);
+        enqueue(q, node_val);
+
+        break;
+
+    case DEQUEUE:
+        dequeue(q);
+        break;
+
+    case DEQUEUE_ENTIRELY:
+        printf("\n\nDequeuing...\n");
+        //deneque the queue and return values
+        int dq_val;
+        while((dq_val = dequeue(q)) != QUEUE_IS_EMPTY){
+            printf("Dequeued: %d\n", dq_val);
+        }
+
+        break;
+
+    case PRINT_QUEUE:
+        head_ptr = q->head;
+
+        printf("\nCurrent Queue, Oldest to Newest:\n");
+        while(head_ptr){
+            printf("\tnode: %d\n", head_ptr->val);
+            head_ptr = head_ptr->next;
+        }
+        break;
+
+    default:
+        break;
+    
+    }
+
+}
+
+
+
 int main(){
 
     struct queue_t queue;
@@ -130,10 +138,15 @@ int main(){
     int user_choice = 0;
 
     while(user_choice != QUIT){
-        printf("What would you like to do?\n1.) Enqueue\n2.) Dequeue\n3.) Dequeue Entirely\n4.) Show Queue\n5.) Quit\n");
+        printf("\nWhat would you like to do?\n1.) Enqueue\n2.) Dequeue\n3.) Dequeue Entirely\n4.) Show Queue\n5.) Quit\n");
         scanf("%d", &user_choice);
 
+        //free the entire queue if the user quits--- same as the #3 command from user
         if(user_choice == QUIT){
+            int dq_val;
+            while((dq_val = dequeue(&queue)) != QUEUE_IS_EMPTY){
+                //printf("Dequeued: %d\n", dq_val);
+            }
             printf("Seeya next time!\n");
             //add a freeing function
             break;
