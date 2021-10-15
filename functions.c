@@ -109,6 +109,7 @@ void user_choice_controls(int user_choice, struct queue_t *q){
         break;
 
     default:
+        printf("\n**Wrong Input**\n");
         break;
     
     }

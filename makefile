@@ -3,9 +3,9 @@ CFLAGS = -g -Wall
 OBJFLAGS = -g -Wall -c
 MATHLIB = -lm
 
-#Remove the ./queue executable when cleaned, also run the makefile 'queue' command
-targets = queue
-clean_targets = queue
+targets = functions queue
+clean_targets = queue # Remove the ./queue executable when cleaned
+
 
 all : $(targets)
 
@@ -19,4 +19,4 @@ queue : queue.c
 	$(CC) $(CFLAGS) functions.o $@.c -o $@
 
 clean :
-	rm *.o $(targets)
+	rm *.o $(clean_targets)

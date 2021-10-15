@@ -15,7 +15,6 @@
 #include "functions.h"
 
 
-
 int main(){
 
     struct queue_t queue;
@@ -29,12 +28,12 @@ int main(){
 
         //free the entire queue if the user quits--- same as the #3 command from user
         if(user_choice == QUIT){
+
             int dq_val;
             while((dq_val = dequeue(&queue)) != QUEUE_IS_EMPTY){
-                //printf("Dequeued: %d\n", dq_val);
             }
             printf("Seeya next time!\n");
-            //add a freeing function
+
             break;
         }
 
@@ -42,19 +41,6 @@ int main(){
     } 
     
     
-
-
-
-    /*
-    enqueue(&queue, 2);
-    enqueue(&queue, 6);
-    enqueue(&queue, 10);
-    enqueue(&queue, 14);
-    enqueue(&queue, 18);*/
-
-     
-
-
 
     return 0;
 }
